@@ -39,34 +39,29 @@ where idpersona='$idpersona' ";
             }	
 }
 
-function Registrar_Vacaciones_Empleado( $idempleado,$diadisponibleactual,$fechainicio,$fechafinal,$descrition,$motivo,$diasselecionados){
- $sql = "INSERT INTO vacaciones(idempleado, fechinicio, fechafinal, motivo, diasvacaciones, descripcion,datecreate) 
-  VALUES ('$idempleado','$fechainicio','$fechafinal','$motivo','$diasselecionados','$descrition',NOW())";
-            if ($consulta = $this->conexion->conexion->query($sql)) {
-           
-           $this->Actualizar_Estado_Persona($idempleado,$diadisponibleactual);
-
-           $response = array('status' => true,'auth' => true,'msg' => 'La operación se completo corectamente.','data'=> 1);
-           return json_encode($response);
-                
-            }else{
-                $response = array('status' => true,'auth' => true,'msg' => 'No se pudo completar el regitro','data'=> 0);
-           return json_encode($response);
-            }
-
+function Registrar_Vacaciones_Empleado($idempleado, $diadisponibleactual, $fechainicio, $fechafinal, $descrition, $motivo, $diasselecionados, $descontarDias){
+    $sql = "INSERT INTO vacaciones(idempleado, fechinicio, fechafinal, motivo, diasvacaciones, descripcion, datecreate, descontar_dias) 
+            VALUES ('$idempleado', '$fechainicio', '$fechafinal', '$motivo', '$diasselecionados', '$descrition', NOW(), '$descontarDias')";
+    if ($consulta = $this->conexion->conexion->query($sql)) {
+        // Si $descontarDias es TRUE, actualizamos los días disponibles del empleado
+        if($descontarDias) {
+            $this->Actualizar_Estado_Persona($idempleado, $diadisponibleactual);
+        }
+        $response = array('status' => true, 'auth' => true, 'msg' => 'La operación se completó correctamente.', 'data'=> 1);
+        return json_encode($response);
+    } else {
+        $response = array('status' => true, 'auth' => true, 'msg' => 'No se pudo completar el registro', 'data'=> 0);
+        return json_encode($response);
+    }
 }
-
-function Actualizar_Estado_Persona($idempleado,$diadisponibleactual){
-
-    $sql = "UPDATE  jornada SET diasvacacionale='$diadisponibleactual', stadovaciones='Vacaciones' WHERE personaid= '$idempleado' ";
-           if ($consulta = $this->conexion->conexion->query($sql)) {      
-              return 1;
-              
-            }else{
-              return 0;
-            }
+function Actualizar_Estado_Persona($idempleado, $diadisponibleactual){
+    $sql = "UPDATE jornada SET diasvacacionale='$diadisponibleactual', stadovaciones='Vacaciones' WHERE personaid= '$idempleado'";
+    if ($consulta = $this->conexion->conexion->query($sql)) {      
+        return 1;
+    } else {
+        return 0;
+    }
 }
-
 function Personal_Vacaciones_backgroundRunn(){ 
    $sql="SELECT  idempleado, fechinicio, fechafinal FROM vacaciones ";
             $arreglo = array();

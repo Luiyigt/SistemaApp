@@ -134,7 +134,7 @@ $estado = $_GET['estado'] ?? '';
              <br>
             <div class="archivo-wrapper" id="contenidoshowfoto" style="text-align: center;display: none">
             	  <a  onclick="Quitarfoto();" ><i class="fa fa-times-circle" aria-hidden="true" style="color:black;text-align:right; "></i></a>
-             <img  id="mostrarimagen"  style="text-align: center; width: 50px;height: 50px;">
+                <img id="mostrarimagen" style="text-align: center; width: 300px; height: 300px;">
             </div>
          </div>
          </div>

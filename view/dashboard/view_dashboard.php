@@ -23,16 +23,57 @@
             width: 100%;
             height: auto;
         }
+        .widget-link {
+            text-decoration: none;
+        }
+
+        .widget-link:hover, .widget-link:focus {
+            text-decoration: none;
+        }
+
+        .widget-small {
+            cursor: pointer;
+        }
     </style>
-    <!-- Widgets y otros elementos del dashboard -->
+
     <div class="col-md-3">
-        <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
-            <div class="info">
-                <h4>Total Personal</h4>
-                <p id="" class="inline-p">Total:</p>
-                <p class="inline-p" id="TotasPersonadashboard">0</p>
+        <!-- Widget Total Personal -->
+        <a href="total_personal.php" class="widget-link">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                <div class="info">
+                    <h4>Total Personal</h4>
+                    <p class="inline-p">Total:</p>
+                    <p class="inline-p" id="TotasPersonadashboard">0</p>
+                </div>
             </div>
-        </div>
+        </a>
+    </div>
+
+    <!-- NUEVOS WIDGETS -->
+    <div class="col-md-3">
+        <!-- Widget Cumpleañeros -->
+        <a href="cumpleaneros.php" class="widget-link">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-birthday-cake fa-3x"></i>
+                <div class="info">
+                    <h4>Cumpleañeros</h4>
+                    <p class="inline-p">Hoy:</p>
+                    <p class="inline-p" id="CumpleanerosDashboard">0</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <!-- Widget Empleados Ausentes/Vacaciones -->
+        <a href="empleados_ausentes.php" class="widget-link">
+            <div class="widget-small primary coloured-icon"><i class="icon fa fa-user-times fa-3x"></i>
+                <div class="info">
+                    <h4>Empleados Ausentes/Vacaciones</h4>
+                    <p class="inline-p">Actualmente:</p>
+                    <p class="inline-p" id="AusentesDashboard">0</p>
+                </div>
+            </div>
+        </a>
     </div>
 </div>
 <div class="image-slider-container">
